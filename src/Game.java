@@ -46,6 +46,7 @@ public class Game {
 
         JPanel wordListPanel = new JPanel();
         wordListPanel.setPreferredSize(new Dimension(360, 490));
+        wordListPanel.setLayout(new BoxLayout(wordListPanel, BoxLayout.Y_AXIS));
         inputBox.add(wordListPanel);
 
         JTextField wordEntryField = new JTextField();
@@ -54,7 +55,14 @@ public class Game {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                wordList.add(wordEntryField.getText());
+                String word = wordEntryField.getText();
+
+                wordList.add(word);
+                JLabel wordInList = new JLabel(word);
+                wordInList.setFont(new Font("Arial", Font.BOLD, 20));
+                wordListPanel.add(wordInList);
+
+                window.validate();
                 wordEntryField.setText("");
 
             }
@@ -63,7 +71,7 @@ public class Game {
         wordEntryField.setPreferredSize(new Dimension(360, 50));
         inputBox.add(wordEntryField);
 
-        container.add(inputBox);
+        container.add(inputBox);wordEntryField.getText();
     }
 
     private void initializeContainer(){
