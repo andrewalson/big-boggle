@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Game {
 
@@ -22,11 +23,11 @@ public class Game {
         setBoardPanel();
         generateBoard();
         generateInputBox();
+        window.setVisible(true);
     }
 
     private void initializeWindow(){
         window = new JFrame();
-        window.setVisible(true);
         window.setSize(1400, 700);
         window.setTitle("Biggle");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -40,22 +41,23 @@ public class Game {
 
     private void generateInputBox(){
         inputBox = new JPanel();
-        inputBox.setVisible(true);
         inputBox.setPreferredSize(new Dimension(380, 550));
         inputBox.setBackground(Color.blue);
 
         JPanel wordListPanel = new JPanel();
         wordListPanel.setPreferredSize(new Dimension(360, 490));
         wordListPanel.setLayout(new BoxLayout(wordListPanel, BoxLayout.Y_AXIS));
-        inputBox.add(wordListPanel);
 
         JTextField wordEntryField = new JTextField();
+
+        JButton submitButton = new JButton("Submit Words!");
 
         wordEntryField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 String word = wordEntryField.getText();
+                word = word.toUpperCase();
 
                 wordList.add(word);
                 JLabel wordInList = new JLabel(word);
@@ -68,10 +70,12 @@ public class Game {
             }
         });
 
-        wordEntryField.setPreferredSize(new Dimension(360, 50));
-        inputBox.add(wordEntryField);
+        wordEntryField.setPreferredSize(new Dimension(360, 20));
 
-        container.add(inputBox);wordEntryField.getText();
+        inputBox.add(wordListPanel);
+        inputBox.add(wordEntryField);
+        container.add(inputBox);
+        inputBox.add(submitButton);
     }
 
     private void initializeContainer(){

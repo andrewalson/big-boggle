@@ -24,15 +24,15 @@ public class Board extends JPanel {
         dice.add(new String[]{"Y", "S", "P", "F", "R", "I"});
         dice.add(new String[]{"H", "O", "H", "L", "D", "R"});
         dice.add(new String[]{"T", "I", "E", "T", "I", "I"});
-        dice.add(new String[]{"Z", "B", "K", "J", "X", "Qu"});
+        dice.add(new String[]{"Z", "B", "K", "J", "X", "C"});
         dice.add(new String[]{"N", "O", "T", "D", "D", "H"});
         dice.add(new String[]{"H", "D", "L", "H", "O", "N"});
         dice.add(new String[]{"L", "I", "C", "T", "I", "E"});
         dice.add(new String[]{"R", "A", "A", "S", "F", "A"});
-        dice.add(new String[]{"W", "K", "I", "L", "Q", "Qu"});
+        dice.add(new String[]{"W", "K", "I", "L", "Q", "P"});
         dice.add(new String[]{"E", "N", "S", "S", "U", "S"});
         dice.add(new String[]{"E", "E", "A", "E", "E", "M"});
-        dice.add(new String[]{"Th", "He", "Er", "Qu", "An", "In"});
+//        dice.add(new String[]{"Th", "He", "Er", "Qu", "An", "In"});
 
     }
 
