@@ -32,6 +32,7 @@ public class Board extends JPanel {
         dice.add(new String[]{"W", "K", "I", "L", "Q", "P"});
         dice.add(new String[]{"E", "N", "S", "S", "U", "S"});
         dice.add(new String[]{"E", "E", "A", "E", "E", "M"});
+        dice.add(new String[]{"E", "E", "A", "E", "E", "M"});
 //        dice.add(new String[]{"Th", "He", "Er", "Qu", "An", "In"});
 
     }
@@ -39,6 +40,8 @@ public class Board extends JPanel {
     private String[] chosenLetters = new String[25];
 
     private JPanel[][] board = new JPanel[5][5];
+    String[][] lettersOnBoard = new String[5][5];
+
     public Board(){
         visualAttributes();
 
@@ -67,14 +70,23 @@ public class Board extends JPanel {
             for (int col = 0; col < 5; col++){
                 JPanel die = new JPanel();
                 die.setLayout(new GridBagLayout());
+
                 JLabel jLabel = new JLabel(chosenLetters[counter]);
+
+
                 jLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+
                 die.add(jLabel);
                 this.add(die);
                 board[row][col] = die;
+                lettersOnBoard[row][col]= chosenLetters[counter];
                 counter++;
             }
         }
+    }
+
+    public String[][] getLettersOnBoard(){
+        return lettersOnBoard;
     }
 
     public void chooseDice(){
