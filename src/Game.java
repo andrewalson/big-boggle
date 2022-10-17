@@ -2,8 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Map;
 
 public class Game {
 
@@ -91,15 +93,14 @@ public class Game {
                                     //check letter up and right
                                     if (currentRow != 0 && currentCol != 4 && !used[currentRow - 1][currentCol + 1]){
                                         if (lettersOnBoard[currentRow-1][currentCol+1].equals(currentLetter)){
-
+                                            currentRow--;
+                                            currentCol++;
+                                            used[currentRow][currentCol] = true;
+                                            letterFound = true;
                                         }
-                                        currentRow--;
-                                        currentCol++;
-                                        used[currentRow][currentCol] = true;
-                                        letterFound = true;
                                     }
                                     //check letter to the right
-                                    if (currentCol != 4 && !used[currentRow][currentCol] && !letterFound){
+                                    if (currentCol != 4 && !used[currentRow][currentCol+1] && !letterFound){
                                         if (lettersOnBoard[currentRow][currentCol+1].equals(currentLetter)){
                                             currentCol++;
                                             used[currentRow][currentCol] = true;
@@ -107,7 +108,7 @@ public class Game {
                                         }
                                     }
                                     //check bottom right
-                                    if (currentRow != 4 && currentRow != 4 && !used[currentRow][currentCol] && !letterFound){
+                                    if (currentRow != 4 && currentRow != 4 && !used[currentRow+1][currentCol+1] && !letterFound){
                                         if (lettersOnBoard[currentRow+1][currentCol+1].equals(currentLetter)){
                                             currentRow++;
                                             currentCol++;
@@ -116,7 +117,7 @@ public class Game {
                                         }
                                     }
                                     //check bottom middle
-                                    if (currentRow != 4 && !used[currentRow][currentCol] && !letterFound){
+                                    if (currentRow != 4 && !used[currentRow+1][currentCol] && !letterFound){
                                         if (lettersOnBoard[currentRow+1][currentCol].equals(currentLetter)){
                                             currentRow++;
                                             used[currentRow][currentCol] = true;
@@ -124,7 +125,7 @@ public class Game {
                                         }
                                     }
                                     //bottom left
-                                    if (currentRow != 4 && currentCol != 0 && !used[currentRow][currentCol] && !letterFound){
+                                    if (currentRow != 4 && currentCol != 0 && !used[currentRow+1][currentCol-1] && !letterFound){
                                         if (lettersOnBoard[currentRow+1][currentCol-1].equals(currentLetter)){
                                             currentRow++;
                                             currentCol--;
@@ -133,7 +134,7 @@ public class Game {
                                         }
                                     }
                                     //middle left
-                                    if (currentCol != 0 && !used[currentRow][currentCol] && !letterFound){
+                                    if (currentCol != 0 && !used[currentRow][currentCol-1] && !letterFound){
                                         if (lettersOnBoard[currentRow][currentCol-1].equals(currentLetter)){
                                             currentCol--;
                                             used[currentRow][currentCol] = true;
@@ -141,7 +142,7 @@ public class Game {
                                         }
                                     }
                                     //top left
-                                    if (currentRow != 0 && currentCol != 0 && !used[currentRow][currentCol] && !letterFound){
+                                    if (currentRow != 0 && currentCol != 0 && !used[currentRow-1][currentCol-1] && !letterFound){
                                         if (lettersOnBoard[currentRow-1][currentCol-1].equals(currentLetter)){
                                             currentRow--;
                                             currentCol--;
@@ -168,8 +169,14 @@ public class Game {
                     if (!wordFound){
                         Component[] components = wordListPanel.getComponents();
                         for (Component component : components){
-
-
+                            JLabel label = (JLabel) component;
+                            if (label.getText().equals(word)){
+                                Map attributes = label.getFont().getAttributes();
+                                attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+                                label.setFont(label.getFont().deriveFont(attributes));
+                                wordListPanel.validate();
+                                break;
+                            }
                         }
                     }
                 }
